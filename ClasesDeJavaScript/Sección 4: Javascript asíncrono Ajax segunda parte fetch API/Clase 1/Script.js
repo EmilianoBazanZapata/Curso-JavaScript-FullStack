@@ -9,24 +9,32 @@ const NombreUsuario = document.getElementById("nombre");
 const ApellidoUsuario = document.getElementById("apellido");
 //tomo el pais del formulario para agregarlo a la BD
 const PaisUsuario = document.getElementById("pais");
+let BotonesEliminar = null;
 //obtener datos de un servidor remoto
 function Render () 
 {
     //una vez obtenidos los datos , los mostramos en el html
-    const UsuariosRender = ArrayUsuarios.map(usuario => `<tr>
+    const UsuariosRender = ArrayUsuarios.map((usuario,indice) => `<tr>
                                                              <td>${usuario.nombre ? usuario.nombre : 'vacio'}</td>
                                                              <td>${usuario.apellido ? usuario.apellido : 'vacio'}</td>
                                                              <td>${usuario.pais ? usuario.pais : 'vacio'}</td>
+                                                             <td><button data-indice=${indice} class="eliminar">eliminar</button></td>
                                                          </tr>`).join("");
     ListaUsuarios.innerHTML = UsuariosRender;
+    //a cada boton le asigno el metodo eliminar 
+    BotonesEliminar = document.getElementsByClassName('eliminar');
+    Array.from(BotonesEliminar).forEach(botonEliminar => {
+        botonEliminar.onclick = EliminarUsuario;
+    });
 }
 
 
 //metodo POST
 const boton = document.getElementById("boton");
 
-function EnviarDatosUsuario()
+function EnviarDatosUsuario(e)
 {
+    e.preventDefault();
     const datos = {
                         nombre:NombreUsuario.value,
                         apellido:ApellidoUsuario.value,
@@ -40,6 +48,30 @@ function EnviarDatosUsuario()
         headers:{
             'Content-Type': 'application/json'
         }
+    }
+    )
+    .then((response)=>response.json()
+    .then(RespuestaJson =>{
+            console.log("RespuestaJson",RespuestaJson);
+            Refrescar();
+        })
+    )
+}
+
+//metodo DELETE
+
+function EliminarUsuario(e)
+{
+    e.preventDefault();
+    const datos = {
+                        nombre:NombreUsuario.value,
+                        apellido:ApellidoUsuario.value,
+                        pais:PaisUsuario.value
+                  };
+    
+
+    fetch(url+`/${e.target.dataset.indice}`, {
+        method: 'DELETE'
     }
     )
     .then((response)=>response.json()
