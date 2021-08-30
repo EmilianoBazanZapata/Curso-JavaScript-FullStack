@@ -1,4 +1,7 @@
-.actions-menu
-{
+.actions-menu {
     margin: 40px 30px;
+}
+
+.col-auto {
+    margin-top: 15px;
 }
