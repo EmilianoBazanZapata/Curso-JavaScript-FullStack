@@ -56,34 +56,34 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="row g-3">
+                            <form class="row g-3" id="formulario">
                                 <div class="col-md-6">
                                     <label for="Nombre" class="visually-hidden">Nombre</label>
-                                    <input type="text" class="form-control" id="Nombre" placeholder="Nombre de la Mascota">
+                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre de la Mascota">
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Dueño</option>
-                                        <option value="">Esteban</option>
-                                        <option value="">Julian</option>
-                                        <option value="">Jhon</option>
-                                        <option value="">Felix</option>
+                                    <select class="form-select" aria-label="Default select example" id="propietario">
+                                        <option >Dueño</option>
+                                        <option >Esteban</option>
+                                        <option >Julian</option>
+                                        <option >Jhon</option>
+                                        <option >Felix</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Tipo de Animal</option>
-                                        <option value="">Perro</option>
-                                        <option value="">Gato</option>
-                                        <option value="">Ave</option>
-                                        <option value="">Otro</option>
+                                    <select class="form-select" aria-label="Default select example" id="tipo">
+                                        <option>Tipo de Animal</option>
+                                        <option >Perro</option>
+                                        <option >Gato</option>
+                                        <option >Ave</option>
+                                        <option >Otro</option>
                                     </select>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Agregar</button>
+                            <button type="submit" class="btn btn-primary" id="guardar">Agregar</button>
                         </div>
                     </div>
                 </div>

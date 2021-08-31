@@ -1,3 +1,11 @@
+const TipoMascota = document.getElementById('tipo');
+const NombreMascota = document.getElementById('nombre');
+const PropietarioMascota = document.getElementById('propietario');
+const Formulario = document.getElementById('formulario');
+const BotonGuardar = document.getElementById('guardar');
+
+
+
 const ListaMascotas = document.getElementById('Lista-Mascota');
 let Mascotas = [{
     tipo: "Gato",
@@ -22,4 +30,25 @@ function ListarMascotas() {
     `).join("");
     ListaMascotas.innerHTML = HtmlMascotas;
 }
+
+function EnviarDatos(e) {
+    e.preventDefault();
+    const datos = {
+            tipo: TipoMascota.value,
+            nombre: NombreMascota.value,
+            propietario: PropietarioMascota.value
+        }
+        //console.log(datos);
+    Mascotas.push(datos);
+    ListarMascotas();
+}
+
+
+
+
+
+
+
 ListarMascotas();
+formulario.onsubmit = EnviarDatos;
+BotonGuardar.onclick = EnviarDatos;
