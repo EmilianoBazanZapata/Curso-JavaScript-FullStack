@@ -9,10 +9,16 @@ const Indice = document.getElementById('Indice');
 
 const ListaMascotas = document.getElementById('Lista-Mascota');
 let Mascotas = [{
-    tipo: "Gato",
-    nombre: "Simona",
-    propietario: "Esteban"
-}];
+        tipo: "Gato",
+        nombre: "Simona",
+        propietario: "Esteban"
+    },
+    {
+        tipo: "Perro",
+        nombre: "Manchas",
+        propietario: "Julian"
+    }
+];
 
 function ListarMascotas() {
     const HtmlMascotas = Mascotas.map((mascota, indice) => `
@@ -23,7 +29,7 @@ function ListarMascotas() {
             <td>${mascota.tipo}</td>
             <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary editar"><i class="fas fa-pencil-alt"></i></button>
+                    <button type="button" class="btn btn-primary editar" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="fas fa-pencil-alt"></i></button>
                     <button type="button" class="btn btn-danger eliminar"><i class="far fa-trash-alt"></i></button>
                 </div>
             </td>
@@ -48,8 +54,16 @@ function EnviarDatos(e) {
 function Editar(e) {
     //console.dir("elemento", e);
     //console.log(e);
+
     return function CuandoHagoClick() {
-        console.log(e);
+        //console.log(e);
+        //console.log(Mascotas[e]);
+
+        const Mascota = Mascotas[e];
+        TipoMascota.value = Mascota.tipo;
+        NombreMascota.value = Mascota.nombre;
+        PropietarioMascota.value = Mascota.propietario;
+        Indice.value = e;
     }
 }
 
