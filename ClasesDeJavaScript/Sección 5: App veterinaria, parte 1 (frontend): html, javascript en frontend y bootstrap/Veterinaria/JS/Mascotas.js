@@ -38,6 +38,8 @@ function ListarMascotas() {
     `).join("");
     ListaMascotas.innerHTML = HtmlMascotas;
     Array.from(document.getElementsByClassName('editar')).forEach((BotonEditar, index) => BotonEditar.onclick = Editar(index));
+    Array.from(document.getElementsByClassName('eliminar')).forEach((BotonEliminar, index) => BotonEliminar.onclick = Eliminar(index));
+
 }
 
 function EnviarDatos(e) {
@@ -77,6 +79,15 @@ function Editar(e) {
         PropietarioMascota.value = Mascota.propietario;
         Indice.value = e;
         BotonGuardar.innerHTML = 'Editar';
+    }
+}
+//eliminarMascota
+function Eliminar(e) {
+    return function ClickEliminar() {
+        //console.log('index', e);
+        //delete Mascotas[e];
+        Mascotas = Mascotas.filter((mascota, indicemascota) => indicemascota !== e);
+        ListarMascotas();
     }
 }
 
