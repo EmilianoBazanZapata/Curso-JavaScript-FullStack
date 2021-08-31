@@ -23,14 +23,14 @@ function ListarMascotas() {
             <td>${mascota.tipo}</td>
             <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary editar" data-indice=${indice}><i class="fas fa-pencil-alt"></i></button>
+                    <button type="button" class="btn btn-primary editar"><i class="fas fa-pencil-alt"></i></button>
                     <button type="button" class="btn btn-danger eliminar"><i class="far fa-trash-alt"></i></button>
                 </div>
             </td>
         </tr>
     `).join("");
     ListaMascotas.innerHTML = HtmlMascotas;
-    Array.from(document.getElementsByClassName('editar')).forEach((BotonEditar) => BotonEditar.onclick = Editar);
+    Array.from(document.getElementsByClassName('editar')).forEach((BotonEditar, index) => BotonEditar.onclick = Editar(index));
 }
 
 function EnviarDatos(e) {
@@ -46,7 +46,11 @@ function EnviarDatos(e) {
 }
 //editar mascota
 function Editar(e) {
-    console.log("evento", e)
+    //console.dir("elemento", e);
+    //console.log(e);
+    return function CuandoHagoClick() {
+        console.log(e);
+    }
 }
 
 
