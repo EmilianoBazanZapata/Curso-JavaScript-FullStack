@@ -4,6 +4,7 @@ const PropietarioMascota = document.getElementById('propietario');
 const Formulario = document.getElementById('formulario');
 const BotonGuardar = document.getElementById('guardar');
 const Indice = document.getElementById('Indice');
+const BotonAgregar = document.getElementById('Agregar');
 
 
 
@@ -41,14 +42,25 @@ function ListarMascotas() {
 
 function EnviarDatos(e) {
     e.preventDefault();
+    const Accion = BotonGuardar.innerHTML;
     const datos = {
-            tipo: TipoMascota.value,
-            nombre: NombreMascota.value,
-            propietario: PropietarioMascota.value
-        }
-        //console.log(datos);
-    Mascotas.push(datos);
+        tipo: TipoMascota.value,
+        nombre: NombreMascota.value,
+        propietario: PropietarioMascota.value
+    }
+    switch (Accion) {
+        case "Editar":
+            //editar
+            Mascotas[Indice.value] = datos;
+            break
+        default:
+            //crear
+            //console.log(datos);
+            Mascotas.push(datos);
+            break;
+    }
     ListarMascotas();
+    ResetModal();
 }
 //editar mascota
 function Editar(e) {
@@ -64,10 +76,17 @@ function Editar(e) {
         NombreMascota.value = Mascota.nombre;
         PropietarioMascota.value = Mascota.propietario;
         Indice.value = e;
+        BotonGuardar.innerHTML = 'Editar';
     }
 }
 
-
+function ResetModal() {
+    TipoMascota.value = "Tipo de Animal";
+    NombreMascota.value = "";
+    PropietarioMascota.value = "Dueño";
+    Indice.value = "";
+    BotonGuardar.innerHTML = 'Agregar';
+}
 
 
 
@@ -75,3 +94,4 @@ function Editar(e) {
 ListarMascotas();
 formulario.onsubmit = EnviarDatos;
 BotonGuardar.onclick = EnviarDatos;
+BotonAgregar.onclick = ResetModal;
