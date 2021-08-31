@@ -3,6 +3,7 @@ const NombreMascota = document.getElementById('nombre');
 const PropietarioMascota = document.getElementById('propietario');
 const Formulario = document.getElementById('formulario');
 const BotonGuardar = document.getElementById('guardar');
+const Indice = document.getElementById('Indice');
 
 
 
@@ -22,13 +23,14 @@ function ListarMascotas() {
             <td>${mascota.tipo}</td>
             <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    <button type="button" class="btn btn-primary editar" data-indice=${indice}><i class="fas fa-pencil-alt"></i></button>
+                    <button type="button" class="btn btn-danger eliminar"><i class="far fa-trash-alt"></i></button>
                 </div>
             </td>
         </tr>
     `).join("");
     ListaMascotas.innerHTML = HtmlMascotas;
+    Array.from(document.getElementsByClassName('editar')).forEach((BotonEditar) => BotonEditar.onclick = Editar);
 }
 
 function EnviarDatos(e) {
@@ -42,7 +44,10 @@ function EnviarDatos(e) {
     Mascotas.push(datos);
     ListarMascotas();
 }
-
+//editar mascota
+function Editar(e) {
+    console.log("evento", e)
+}
 
 
 
