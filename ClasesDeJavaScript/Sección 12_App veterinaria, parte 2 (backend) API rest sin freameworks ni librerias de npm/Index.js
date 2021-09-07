@@ -66,6 +66,12 @@ const server = http.createServer((req, res) => {
         //decodifico el stream y lo convierto en string 
         buffer += decoder.end();
 
+        if(headers['content-type'] === 'application/json')
+        {
+            //convierto los datos que llegan del buffer en .json
+            buffer = JSON.parse(buffer);
+        }
+
         //3.5 ordenar la data del request
         const datos = 
         {
@@ -81,9 +87,9 @@ const server = http.createServer((req, res) => {
 
         //3.6 elegir el manjeador dependiendo de la ruta y asignarle la funcion que el enrutador tiene
         let handler;
-        if(rutaLimpia  && enrutador[rutaLimpia])
+        if(rutaLimpia  && enrutador[rutaLimpia] && enrutador[rutaLimpia][metodo])
         {
-            handler = enrutador[rutaLimpia];
+            handler = enrutador[rutaLimpia][metodo];
         }
         else
         {
@@ -140,9 +146,18 @@ const enrutador =
     {
         callback(200,[{nombre:'usuario1'},{nombre:'usuario2'},{nombre:'usuario3'}])
     },
-    mascotas:(data,callback)=>
-    {
-        callback(200,recursos.mascotas)
+    mascotas:{
+        get:(data,callback)=>
+        {
+            callback(200,recursos.mascotas)
+        },
+        post:(data,callback)=>
+        {
+            //agregaremos en la ultima posicion el elemento que ingresa por .payload
+            recursos.mascotas.push(data.payload);
+            //console.log('handler',data);
+            callback(201,data.payload)
+        }
     },
     noEncontrado:(data,callback)=>
     {
